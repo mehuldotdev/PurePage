@@ -1,6 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import { db } from "./config/db/db.js";
+import authRoutes from "./routes/auth.js"
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ db();
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json())
+
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req,res) => {
     return res.send("Working port")
