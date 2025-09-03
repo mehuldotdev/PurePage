@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
 import { db } from "./config/db/db.js";
 import authRoutes from "./routes/auth.js"
 
@@ -11,6 +12,9 @@ const PORT = process.env.PORT || 7000;
 
 db();
 
+// Enable CORS for all routes
+app.use(cors());
+
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json())
@@ -19,7 +23,6 @@ app.use("/api/auth", authRoutes);
 
 app.get("/", (req,res) => {
     return res.send("Working port")
-
 })
 
 app.listen(PORT, ()=> console.log(`Server running on ${PORT}`))

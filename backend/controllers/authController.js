@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config();
 import User from "../models/user.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
@@ -57,15 +59,18 @@ export const login = async (req, res) => {
 
         if(!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
+        console.log("JWT_SECRET being used to sign:", JWT_SECRET);
+
         const token = jwt.sign(
-            { id: existingUser._id, role: existingUser.role },
+            { id: existingUser.id, role: existingUser.role },
             JWT_SECRET,
             { expiresIn: JWT_EXPIRES_IN }
         );
 
+
         res.json({ 
             message: "Login successful", 
-            id: existingUser._id, 
+            _id: existingUser.id, 
             role: existingUser.role, 
             token 
         });
@@ -73,5 +78,48 @@ export const login = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error.message });
+    }
+}
+
+export const getUserDetails = async(req,res) => {
+    try {
+
+        const user = await User.findById(req.user._id).select("-password");
+
+        if(!user){
+            return res.status(400).json({message: "User not found"})
+        }
+
+        res.json(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export const updateAddress = async(req,res) => {
+    try {
+
+        const {address} = req.body
+
+        if(!address || address.trim().length === 0){
+            return res.status(400).json({message: "Address can't be empty"});
+        }
+
+        const user = await User.findByIdAndUpdate(req.user.id,
+            {address},
+            {new: true, runValidators: true}
+        ).select("-password")
+
+        if(!user){
+            return res.status(404).json({message: "User not found"});
+        }
+
+        res.json({message: "Address has been updated", user})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+        
     }
 }
