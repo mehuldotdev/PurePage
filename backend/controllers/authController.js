@@ -59,8 +59,6 @@ export const login = async (req, res) => {
 
         if(!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-        console.log("JWT_SECRET being used to sign:", JWT_SECRET);
-
         const token = jwt.sign(
             { id: existingUser.id, role: existingUser.role },
             JWT_SECRET,

@@ -4,6 +4,7 @@ import cors from "cors"
 import { db } from "./config/db/db.js";
 import authRoutes from "./routes/auth.js"
 import bookRoutes from "./routes/book.js"
+import favouriteRoutes from "./routes/favourite.js"
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(express.json())
 
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/api/favourites", favouriteRoutes)
 
 app.get("/", (req,res) => {
     return res.send("Working port")
