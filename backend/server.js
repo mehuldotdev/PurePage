@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import { db } from "./config/db/db.js";
 import authRoutes from "./routes/auth.js"
+import bookRoutes from "./routes/book.js"
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 
 app.use("/api/auth", authRoutes);
+app.use("/api/books", bookRoutes);
 
 app.get("/", (req,res) => {
     return res.send("Working port")
