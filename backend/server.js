@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.js"
 import bookRoutes from "./routes/book.js"
 import favouriteRoutes from "./routes/favourite.js"
 import cartRoutes from "./routes/cart.js"
+import orderRoutes from "./routes/order.js"
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/favourites", favouriteRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.get("/", (req,res) => {
     return res.send("Working port")
