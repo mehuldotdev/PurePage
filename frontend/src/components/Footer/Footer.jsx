@@ -1,8 +1,15 @@
 import React from 'react'
+import { BlurFade } from '../magicui/blur-fade'
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <footer className='fixed border-t-1 border-black flex items-center justify-center md:h-28 h-7 left-0 bottom-0 w-full bg-secondary'>
+      <div>
+        <BlurFade delay={2}>
+        <p>Made with ❤ by Mehul</p>
+        </BlurFade>
+      </div>
+    </footer>
   )
 }
 
