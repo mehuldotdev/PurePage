@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import Home from '../pages/Hero.jsx';
+import Hero from '../pages/Hero.jsx';
 import { Routes } from 'react-router-dom';
 import { Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -11,7 +11,7 @@ function App() {
     <div>
       {/* <Router> */}
         <Navbar />
-        <Home />
+        <Hero />
         <Footer />
       {/* </Router> */}
     </div>
