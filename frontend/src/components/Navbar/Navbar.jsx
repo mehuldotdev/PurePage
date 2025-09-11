@@ -44,16 +44,25 @@ function Navbar() {
       
         <BlurFade delay={1} className="">
       <div className="hidden md:flex items-center gap-4">
+        <Link to={"/signup"}>
         <Button className="hover:bg-primary/80">Sign-up</Button>
+        </Link>
+        <Link to={"/login"}>
         <Button className="hover:bg-primary/80">Login</Button>
+        </Link>
       </div>
       </BlurFade>
 
       {/* Mobile layout */}
       
        <div className="sm:block md:hidden flex items-center gap-4">
+        <Link to={"/signup"}>
         <Button className="hover:bg-primary/80">Sign-up</Button>
+        </Link>
+
+        <Link to={"/login"}>
         <Button className="hover:bg-primary/80">Login</Button>
+        </Link>
       </div>
 
       {/* Mobile Menu Button */}

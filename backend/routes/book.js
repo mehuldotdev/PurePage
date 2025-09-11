@@ -11,7 +11,7 @@ router.put('/update-book/:bookId', protect, updateBook)
 
 router.delete('/delete-book:bookId', protect, deleteBook)
 
-router.get('/', getBooks)
+router.get('/getBooks', getBooks)
 
 router.get('/:bookId', getBookById)
 
