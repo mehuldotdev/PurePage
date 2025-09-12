@@ -15,7 +15,7 @@ function RecentlyAdded() {
   return (
     <div>
         {books.map((book) => {
-            <div key={book._id}>{book.title}</div>
+            <div key={book._id}>{book.title} • {book.author} • {book.price} • {book.desc} • {book.language}</div>
         })}
     </div>
   )
