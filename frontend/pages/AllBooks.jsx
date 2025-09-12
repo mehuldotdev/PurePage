@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import useBookStore from '../store/getBooks.js'
 import { Slab } from 'react-loading-indicators'
 import {BlurFade} from '../src/components/magicui/blur-fade.jsx'
+import { Link } from 'react-router-dom';
 
 function AllBooks() {
 
@@ -27,7 +28,8 @@ function AllBooks() {
             <BlurFade duration={1} direction='up'>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                 {books.map((book) => (
-                    <div key={book._id} className='hover:scale-105 transition-all duration-400 text-white text-shadow-lg shadow-2xl bg-primary rounded-lg p-4 flex flex-col items-center'>
+                  <Link to={`/view-book-details/${book._id}`} key={book._id}>
+                    <div className='hover:scale-105 transition-all duration-400 text-white text-shadow-lg shadow-2xl bg-primary rounded-lg p-4 flex flex-col items-center'>
                         <img 
                             src={book.url} 
                             alt={book.title} 
@@ -38,7 +40,7 @@ function AllBooks() {
                         <p className='text-sm font-semibold mb-2'>${book.price}</p>
                         <p className='text-sm mb-2'>{book.language}</p>
                     </div>
-                    
+                    </Link>
                 ))}
                 
             </div>

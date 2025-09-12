@@ -105,7 +105,7 @@ export const deleteBook = async (req,res) => {
 export const getBooks = async (req,res) => {
     try {
 
-        const books = await Book.find().sort({createdAt: -1}).limit(4);
+        const books = await Book.find().sort({createdAt: -1});
         res.status(200).json({
             message: "All books shown",
             books: books
@@ -123,7 +123,7 @@ export const getBooks = async (req,res) => {
 
 export const getBookById = async(req,res) => {
     try {
-        
+      
         const {bookId} = req.params
 
         const book = await Book.findById(bookId);

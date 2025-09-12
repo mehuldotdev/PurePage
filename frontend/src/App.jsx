@@ -8,6 +8,7 @@ import AllBooks from '../pages/AllBooks.jsx';
 import Login from '../pages/Login.jsx';
 import SignUp from '../pages/SignUp.jsx';
 import { Routes, Router, Route } from 'react-router-dom';
+import ViewBookDetails from './components/ViewBookDetails/ViewBookDetails.jsx';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
           <Route path='/' element={<Hero />}></Route>
           <Route path='/all-books' element={<AllBooks />}></Route>
           <Route path='/cart' element={<Cart />}></Route>
-          <Route path='/profiel' element={<Profile />}></Route>
+          <Route path='/profile' element={<Profile />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/signup' element={<SignUp />}></Route>
+          <Route path='/view-book-details/:bookId' element={<ViewBookDetails />}></Route>
         </Routes>
         <Footer />
     </div>
