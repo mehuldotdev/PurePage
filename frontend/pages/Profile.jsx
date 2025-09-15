@@ -2,12 +2,19 @@ import React, { useEffect } from 'react'
 import Sidebar from '../src/components/Profile/Sidebar.jsx'
 import { Outlet } from 'react-router-dom'
 import { useUserStore } from '../store/userStore.js'
+import { Slab } from 'react-loading-indicators'
 
 function Profile() {
   
   const {user, loading, error, fetchUser} = useUserStore();
 
   useEffect(()=> {
+    const token = localStorage.getItem('token')
+    console.log(token);
+    
+    if(token){
+      fetchUser(token)
+    }
     fetchUser()
   }, [fetchUser])
 

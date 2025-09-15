@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BlurFade } from '../src/components/magicui/blur-fade.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/getAuthStore.js';
 
 function SignUp() {
+
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
+
+  useEffect(()=> {
+    if(!error && useAuthStore.getState().user) {
+      navigate('/login')
+    }
+  }, [error])
+
+  const signup = useAuthStore((state) => state.signup);
+  const loading = useAuthStore((state) => state.loading);
+  const error = useAuthStore((state) => state.error);
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    await signup({ username, email, password, address });
+  }
+
+
   return (
     <div className='h-[100vh] bg-secondary/50 flex items-center justify-center'>
       
@@ -12,6 +37,7 @@ function SignUp() {
         </BlurFade>
         <BlurFade duration={1.15} direction='up'>
         <form className='space-y-5'>
+
           {/* Username */}
           <div className='flex flex-col'>
             <label className='mb-1 text-white text-xl font-medium'>Username</label>
@@ -19,6 +45,8 @@ function SignUp() {
               type='text'
               placeholder='Enter your username'
               name='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className='border bg-secondary border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
@@ -31,6 +59,8 @@ function SignUp() {
               type='email'
               placeholder='Enter your email'
               name='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               className='border bg-secondary border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
@@ -43,6 +73,8 @@ function SignUp() {
               type='password'
               placeholder='Enter your password'
               name='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className='border bg-secondary border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
@@ -55,6 +87,8 @@ function SignUp() {
               rows='3'
               placeholder='Enter your address'
               name='address'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               required
               className='border bg-secondary border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
             />

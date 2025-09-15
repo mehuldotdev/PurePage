@@ -2,6 +2,7 @@ import {create} from 'zustand';
 
 
 export const useUserStore = create((set)=> ({
+
     user: null,
     loading: false,
     error: null,
@@ -20,6 +21,8 @@ export const useUserStore = create((set)=> ({
             if(!res.ok){
                 throw new Error('Failed to fetch user')
             }
+
+            localStorage.setItem('token', data.token);
 
             const data = await res.json()
             set({user: data, loading: false})
